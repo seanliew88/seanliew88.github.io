@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A focused personal portfolio featuring selected projects and a short introduction."
+    />
+    <meta name="color-scheme" content="dark light" />
+    <title>Personal Portfolio</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/site.js" defer></script>
+  </head>
+  <body data-page="home">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <aside class="sidebar" aria-label="Profile and primary navigation">
+      <a class="identity" href="/" aria-label="Go to home page">
+        <span class="avatar" aria-hidden="true">YN</span>
+        <span class="identity-copy">
+          <strong>Your Name</strong>
+          <span>Your role or area of focus</span>
+        </span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a class="nav-link is-active" href="/" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z" /></svg>
+          <span>Home</span>
+        </a>
+        <a class="nav-link" href="/about/">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5v.01" /></svg>
+          <span>About me</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch theme">
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z" /></svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+        </button>
+        <span class="status"><span class="status-dot" aria-hidden="true"></span>Open to conversation</span>
+      </div>
+    </aside>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="breadcrumb" aria-label="Breadcrumb"><span>Home</span></div>
+        <label class="project-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></svg>
+          <span class="sr-only">Filter projects</span>
+          <input id="project-filter" type="search" placeholder="Filter projects..." autocomplete="off" />
+        </label>
+      </header>
+
+      <main id="main-content" class="content">
+        <header class="page-intro">
+          <p class="eyebrow">Selected work</p>
+          <h1>Projects I’ve built and ideas I’ve explored.</h1>
+          <p>
+            A concise collection of work, experiments, and the thinking behind them. Personal details and final project content will be added next.
+          </p>
+        </header>
+
+        <section class="project-list" aria-label="Projects">
+          <article class="project-card" data-search="project title short project description design engineering">
+            <a href="#" aria-label="Project title — details coming soon">
+              <div class="project-card__heading">
+                <h2>Project title</h2>
+                <span class="project-arrow" aria-hidden="true">↗</span>
+              </div>
+              <p>Use this space for a short, specific description of the project, your contribution, and the outcome.</p>
+              <ul class="tag-list" aria-label="Project topics">
+                <li>Design</li>
+                <li>Engineering</li>
+              </ul>
+            </a>
+          </article>
+
+          <article class="project-card" data-search="project title short project description research product">
+            <a href="#" aria-label="Project title — details coming soon">
+              <div class="project-card__heading">
+                <h2>Project title</h2>
+                <span class="project-arrow" aria-hidden="true">↗</span>
+              </div>
+              <p>Add the context that matters most: the problem, what you made, and why the result is useful.</p>
+              <ul class="tag-list" aria-label="Project topics">
+                <li>Research</li>
+                <li>Product</li>
+              </ul>
+            </a>
+          </article>
+
+          <article class="project-card" data-search="project title short project description creative development">
+            <a href="#" aria-label="Project title — details coming soon">
+              <div class="project-card__heading">
+                <h2>Project title</h2>
+                <span class="project-arrow" aria-hidden="true">↗</span>
+              </div>
+              <p>A final project summary can highlight a technical challenge, a creative decision, or a measurable impact.</p>
+              <ul class="tag-list" aria-label="Project topics">
+                <li>Creative</li>
+                <li>Development</li>
+              </ul>
+            </a>
+          </article>
+
+          <p class="empty-state" hidden>No projects match that search.</p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span>© <span data-current-year></span> Your Name.</span>
+        <span>Built with care and curiosity.</span>
+      </footer>
+    </div>
+  </body>
+</html>
