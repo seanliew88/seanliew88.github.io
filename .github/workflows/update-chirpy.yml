@@ -1,0 +1,68 @@
+name: Update Chirpy Theme
+
+on:
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Find latest Chirpy release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          latest="$(gh api repos/cotes2020/jekyll-theme-chirpy/releases/latest --jq .tag_name)"
+          latest="${latest#v}"
+          current="$(ruby -e 'puts File.read("Gemfile")[/jekyll-theme-chirpy\", \"([^\"]+)/, 1]')"
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          if [ "$latest" = "$current" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update pinned theme version
+        if: steps.release.outputs.changed == 'true'
+        env:
+          LATEST_CHIRPY: ${{ steps.release.outputs.latest }}
+        run: |
+          ruby -e 'path="Gemfile"; text=File.read(path); text.sub!(/gem "jekyll-theme-chirpy", "[^"]+"/, %(gem "jekyll-theme-chirpy", "#{ENV.fetch("LATEST_CHIRPY")}")); File.write(path, text)'
+
+      - name: Set up Ruby
+        if: steps.release.outputs.changed == 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.4
+          bundler-cache: false
+
+      - name: Resolve dependencies
+        if: steps.release.outputs.changed == 'true'
+        run: |
+          bundle update jekyll-theme-chirpy
+          bundle lock --add-platform x86_64-linux
+
+      - name: Build and verify site
+        if: steps.release.outputs.changed == 'true'
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build
+          bundle exec htmlproofer _site --disable-external --ignore-urls "/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/"
+
+      - name: Commit verified release
+        if: steps.release.outputs.changed == 'true'
+        env:
+          LATEST_CHIRPY: ${{ steps.release.outputs.latest }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Gemfile Gemfile.lock
+          git commit -m "Update Chirpy to v${LATEST_CHIRPY}"
+          git push

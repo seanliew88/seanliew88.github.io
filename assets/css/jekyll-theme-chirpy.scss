@@ -1,0 +1,113 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+#panel-wrapper .access {
+  display: none;
+}
+
+.project-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.project-card {
+  padding: 1.35rem 1.5rem;
+  border: 1px solid var(--main-border-color);
+  border-radius: 0.75rem;
+  background: var(--card-bg);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.project-card:hover {
+  border-color: var(--link-color);
+  transform: translateY(-2px);
+}
+
+.project-card a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card h2 {
+  margin: 0 0 0.5rem;
+  color: var(--heading-color);
+  font-size: 1.3rem;
+}
+
+.project-card p {
+  margin: 0;
+  color: var(--text-muted-color);
+}
+
+.project-card.is-placeholder {
+  opacity: 0.72;
+}
+
+article[data-toc] > header > .post-meta > span:first-child {
+  display: none;
+}
+
+.project-flow,
+.project-metrics {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.75rem;
+}
+
+.project-flow {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.project-metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.project-flow > div,
+.project-metrics > div {
+  padding: 0.9rem;
+  border: 1px solid var(--main-border-color);
+  border-radius: 0.65rem;
+  background: var(--card-bg);
+}
+
+.project-flow strong,
+.project-metrics strong {
+  display: block;
+  color: var(--heading-color);
+}
+
+.project-flow span {
+  color: var(--link-color);
+  font-weight: 700;
+}
+
+.project-flow small,
+.project-metrics small {
+  color: var(--text-muted-color);
+}
+
+@media (max-width: 991px) {
+  .project-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575px) {
+  .project-flow,
+  .project-metrics {
+    grid-template-columns: 1fr;
+  }
+}

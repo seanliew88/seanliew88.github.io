@@ -4,10 +4,11 @@ Personal portfolio for Sean Liew, a Computing undergraduate at Imperial College 
 
 Live site: [seanliew88.github.io](https://seanliew88.github.io/)
 
-The publishable static site lives in `dist/` and is deployed automatically with GitHub Pages.
+The site uses the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) Jekyll theme and deploys automatically through GitHub Pages.
 
-- `dist/index.html` — Home and project list
-- `dist/about/index.html` — About page
-- `dist/projects/fzap/index.html` — FZAP project case study
-- `dist/assets/styles.css` — Theme and responsive layout
-- `dist/assets/site.js` — Theme switcher, mobile navigation, and project filter
+- `index.html` — project index
+- `_tabs/about.md` — About page
+- `_posts/` — project case studies
+- `assets/img/` — project images
+- `.github/workflows/pages-deploy.yml` — build and deployment
+- `.github/workflows/update-chirpy.yml` — weekly verified Chirpy release updates
