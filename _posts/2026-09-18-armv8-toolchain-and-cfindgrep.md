@@ -38,6 +38,10 @@ The main correctness boundary is field width. An immediate that does not fit its
 
 The emulator models registers, memory, the program counter, and the processor flags needed by the supported instruction subset. Its fetch-decode-execute loop reads one 32-bit instruction, classifies it by its fixed opcode bits, extracts operands, applies the instruction semantics, and updates the program counter.
 
+The implementation keeps bit-field extraction separate from instruction semantics. `decode.c` decomposes the binary word, while instruction-specific modules perform the state transition against the registers, flags, and memory defined in `state.h`; `output.c` serializes the final machine state for comparison with expected results. This boundary lets the central emulator coordinate execution without accumulating the logic for every instruction class in one file.
+
+My primary responsibility in the emulator was the single-data-transfer subsystem: load-literal and single-data-transfer instructions, their addressing modes, and little-endian memory reads and writes. This work sat at the boundary between instruction decoding and the memory model, so effective-address calculation, addressing-mode behavior, and byte order all had to agree with the architectural state representation.
+
 We then used the assembler output for a Raspberry Pi LED program. GPIO14 is configured through `GPFSEL1` at offset `0x4` from the GPIO base address `0x3f200000`: bits 12–14 are cleared with `BIC`, then set to `001` with `ORR` to select output mode. Writing `1 << 14` to `GPSET0` at offset `0x1c` turns the pin on; writing the same bit to `GPCLR0` at offset `0x28` turns it off.
 
 The emulator's normal memory is only 2 MiB, so memory-mapped GPIO addresses cannot be treated as ordinary RAM. The load/store path detects accesses in the GPIO range and reports the simulated hardware write instead. That small adaptation let the same assembled program validate both the encoder and the observable I/O sequence without requiring physical hardware for every test.
