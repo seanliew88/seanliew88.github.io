@@ -1,6 +1,6 @@
 ---
 title: ARMv8 Toolchain & CFindGrep
-date: 2026-09-18 00:00:00 +0800
+date: 2026-09-19 00:00:00 +0800
 description: Building a two-pass ARMv8 assembler and emulator, then applying POSIX threads, condition variables, and recursive pattern matching to a concurrent find-and-grep tool.
 permalink: /projects/cfindgrep/
 toc: true

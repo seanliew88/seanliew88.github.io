@@ -1,6 +1,6 @@
 ---
 title: Custom PL
-date: 2026-09-21 00:00:00 +0800
+date: 2026-09-18 00:00:00 +0800
 description: Building a small C++ compiler around precise diagnostics, checked constant evaluation, indexed AST nodes, C++17 code generation, and explicit region-based memory management.
 permalink: /projects/custom-pl/
 toc: true
