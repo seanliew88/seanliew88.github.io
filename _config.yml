@@ -140,9 +140,9 @@ assets:
     env: # [development | production]
 
 pwa:
-  enabled: true # The option for PWA feature (installable)
+  enabled: false # Disable the service worker so deployed pages are never served from a stale cache
   cache:
-    enabled: true # The option for PWA offline cache
+    enabled: false # Keep the generated cleanup worker in purge mode for existing visitors
     # Paths defined here will be excluded from the PWA cache.
     # Usually its value is the `baseurl` of another website that
     # shares the same domain name as the current website.

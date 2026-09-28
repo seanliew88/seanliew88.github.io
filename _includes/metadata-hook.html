@@ -1,0 +1,33 @@
+<link
+  rel="preload"
+  href="{{ '/assets/fonts/source-sans-pro-400.woff2' | relative_url }}"
+  as="font"
+  type="font/woff2"
+  crossorigin
+>
+<link
+  rel="preload"
+  href="{{ '/assets/fonts/lato-400.woff2' | relative_url }}"
+  as="font"
+  type="font/woff2"
+  crossorigin
+>
+
+<script>
+  // Remove Chirpy's former cache-first service worker after the fixed page loads.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(registrations.map((registration) => registration.unregister()));
+
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        await Promise.all(
+          cacheNames
+            .filter((cacheName) => cacheName.startsWith('chirpy-'))
+            .map((cacheName) => caches.delete(cacheName))
+        );
+      }
+    });
+  }
+</script>
